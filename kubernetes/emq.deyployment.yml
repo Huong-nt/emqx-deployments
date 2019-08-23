@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: emqx
-  replicas: 10
+  replicas: 3
   serviceName: emqx
   template:
     metadata:
@@ -17,7 +17,7 @@ spec:
       serviceAccountName: emqx
       containers:
       - name: emqx
-        image: sakibsami/emqx:latest
+        image: 0984760xxx/emqx:latest
         ports:
           - containerPort: 1883
           - containerPort: 8883
@@ -46,7 +46,7 @@ spec:
           - name: EMQ_CLUSTER__DISCOVERY
             value: "k8s"
           - name: EMQ_CLUSTER__K8S__APISERVER
-            value: "https://kubernetes.default:443"
+            value: "https://34.66.212.54:443"
           - name: EMQ_CLUSTER__K8S__NAMESPACE
             value: "emqx"
           - name: EMQ_CLUSTER__K8S__SERVICE_NAME
@@ -63,3 +63,8 @@ spec:
             value: "on"
           - name: EMQ_CLUSTER__AUTOCLEAN
             value: "5m"
+          - name: EMQX_ADMIN_PASSWORD
+            value: "nao123456"
+          - name: EMQX_LOADED_PLUGINS
+            value: "emqx_recon,emqx_management,emqx_dashboard"
+

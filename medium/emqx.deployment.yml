@@ -1,0 +1,66 @@
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: emqx
+  labels:
+    app: emqx
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: emqx
+    spec:
+      serviceAccountName: emqx
+      containers:
+        - name: emqx
+          image: 0984760xxx/emqx:release-3.2-amd64
+          imagePullPolicy: "Always"
+          ports:
+            - name: emqx-dashboard
+              containerPort: 18083
+            - name: emqx-mqtt-ssl
+              containerPort: 8883
+            - name: emqx-mqtt
+              containerPort: 1883
+          env:
+            - name: EMQX_CLUSTER__DISCOVERY
+              value: k8s
+            - name: EMQX_NAME
+              value: emqx
+            - name: EMQX_CLUSTER__K8S__APISERVER
+              value: https://kubernetes.default:443
+            - name: EMQX_CLUSTER__K8S__NAMESPACE
+              value: default
+            - name: EMQX_CLUSTER__K8S__SERVICE_NAME
+              value: emqx
+            - name: EMQX_CLUSTER__K8S__ADDRESS_TYPE
+              value: ip
+            - name: EMQX_CLUSTER__K8S__APP_NAME
+              value: emqx
+            - name: EMQX_NODE__COOKIE
+              value: secretcookieeee
+
+            - name: EMQX_ADMIN_PASSWORD
+              value: nao123456
+            - name: EMQX_ALLOW_ANONYMOUS
+              value: false
+            - name: EMQX_LOADED_PLUGINS
+              value: emqx_recon,emqx_retainer,emqx_management,emqx_dashboard,emqx_auth_http,emqx_web_hook
+
+            - name: EMQX_AUTH__HTTP__AUTH_REQ
+              value: http://172.16.200.9:6000/api/v1/mqtt/auth
+            - name: EMQX_AUTH__HTTP__AUTH_REQ__METHOD
+              value: get
+            - name: EMQX_AUTH__HTTP__SUPER_REQ
+              value: http://172.16.200.9:6000/api/v1/mqtt/superuser
+            - name: EMQX_AUTH__HTTP__SUPER_REQ__METHOD
+              value: get
+            - name: EMQX_AUTH__HTTP__ACL_REQ
+              value: http://172.16.200.9:6000/api/v1/mqtt/acl
+            - name: EMQX_AUTH__HTTP__ACL_REQ__METHOD
+              value: get
+            - name: EMQX_WEB__HOOK__API__URL
+              value: http://172.16.200.8:8181/event
+          tty: true

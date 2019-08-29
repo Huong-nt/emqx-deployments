@@ -14,7 +14,7 @@ spec:
       labels:
         app: emqx-auth-http
     spec:
-      serviceAccountName: fptiot
+      serviceAccountName: emqx
       containers:
         - name: emqx-auth-http
           image: 0984760xxx/emqx-auth-http:2019.08.29

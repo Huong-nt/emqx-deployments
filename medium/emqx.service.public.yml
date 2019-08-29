@@ -7,6 +7,12 @@ spec:
   - port: 32333
     targetPort:  emqx-dashboard
     protocol: TCP
+  - port: 8883
+    targetPort:  emqx-mqtt-ssl
+    protocol: TCP
+  - port: 1883
+    targetPort:  emqx-mqtt
+    protocol: TCP
   selector:
     app: emqx
   type: LoadBalancer

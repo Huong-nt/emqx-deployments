@@ -4,13 +4,16 @@ metadata:
   name: emqx-public
 spec:
   ports:
-  - port: 32333
+  - name: emqx-dashboard
+    port: 32333
     targetPort:  emqx-dashboard
     protocol: TCP
-  - port: 8883
+  - name: emqx-mqtt-ssl
+    port: 8883
     targetPort:  emqx-mqtt-ssl
     protocol: TCP
-  - port: 1883
+  - name: emqx-mqtt
+    port: 1883
     targetPort:  emqx-mqtt
     protocol: TCP
   selector:

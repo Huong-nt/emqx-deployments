@@ -50,15 +50,15 @@ spec:
               value: emqx_recon,emqx_retainer,emqx_management,emqx_dashboard,emqx_auth_http,emqx_web_hook
 
             - name: EMQX_AUTH__HTTP__AUTH_REQ
-              value: emqx-auth-service.default.svc.cluster.local:6000/api/v1/mqtt/auth
+              value: http://emqx-auth-service.default.svc.cluster.local:6000/api/v1/mqtt/auth
             - name: EMQX_AUTH__HTTP__AUTH_REQ__METHOD
               value: get
             - name: EMQX_AUTH__HTTP__SUPER_REQ
-              value: emqx-auth-service.default.svc.cluster.local:6000/api/v1/mqtt/superuser
+              value: http://emqx-auth-service.default.svc.cluster.local:6000/api/v1/mqtt/superuser
             - name: EMQX_AUTH__HTTP__SUPER_REQ__METHOD
               value: get
             - name: EMQX_AUTH__HTTP__ACL_REQ
-              value: emqx-auth-service.default.svc.cluster.local:6000/api/v1/mqtt/acl
+              value: http://emqx-auth-service.default.svc.cluster.local:6000/api/v1/mqtt/acl
             - name: EMQX_AUTH__HTTP__ACL_REQ__METHOD
               value: get
             - name: EMQX_WEB__HOOK__API__URL

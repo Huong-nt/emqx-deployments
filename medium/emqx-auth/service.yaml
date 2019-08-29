@@ -1,0 +1,13 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: emqx-auth-service
+spec:
+  ports:
+    - port: 6000
+      targetPort: emqx-auth-http
+      protocol: TCP
+
+  selector:
+    app: emqx-auth-http

@@ -1,0 +1,26 @@
+apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
+kind: Deployment
+metadata:
+  name: emqx-auth-deployment
+  labels:
+    app: emqx-auth-http
+spec:
+  selector:
+    matchLabels:
+      app: emqx-auth-http
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: emqx-auth-http
+    spec:
+      serviceAccountName: fptiot
+      containers:
+        - name: emqx-auth-http
+          image: 0984760xxx/emqx-auth-http:2019.08.29
+          imagePullPolicy: "Always"
+          ports:
+            - name: emqx-auth-http
+              containerPort: 6000
+          tty: true
+
